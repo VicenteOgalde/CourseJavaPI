@@ -24,9 +24,10 @@ public class Arrays {
 		}
 		for (int[] row:matrix) {
 			for(int i : row) {
-				System.out.print(i+" ");
+				System.out.print(i+"  ");
 			}
 			System.out.println();
+			
 		}
 
 	}
