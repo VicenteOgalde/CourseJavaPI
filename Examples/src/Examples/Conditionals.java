@@ -10,9 +10,9 @@ public class Conditionals {
 		System.out.println("type your age: ");
 		int age =scanner.nextInt();
 		if(age>=18) {
-			System.out.println("you are an adult");
+			System.out.println("You are an adult.");
 		}else {
-			System.out.println("you are not an adult");
+			System.out.println("You are not an adult.");
 		}
 		scanner.close();
 	}
