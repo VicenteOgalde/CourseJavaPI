@@ -16,4 +16,45 @@ public class Car {
 		this.weight=weight;
 	}
 
+	public int getWheels() {
+		return wheels;
+	}
+
+	public void setWheels(int wheels) {
+		this.wheels = wheels;
+	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getMotor() {
+		return motor;
+	}
+
+	public void setMotor(int motor) {
+		this.motor = motor;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+	
+
 }
