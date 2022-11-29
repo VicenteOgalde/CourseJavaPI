@@ -15,6 +15,10 @@ public class Employee {
 		this.contractF=new GregorianCalendar(year,month-1,day).getTime();
 		
 	}
+	public Employee(String name) {
+		this(name,30000,2000,01,01);//call the other class constructor
+	}
+	public Employee() {}
 	public String getName() {
 		return this.name;
 	}
