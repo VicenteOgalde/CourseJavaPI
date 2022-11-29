@@ -14,10 +14,11 @@ public class EmployeeMain {
 		System.out.println("Name : "+employee.getName()+"with salary : "+employee.getSalary()+
 				",date finish contract: "+employee.getContractF());*/
 		
-		Employee [] employees=new Employee[3];
+		Employee [] employees=new Employee[4];
 		employees[0]= new Employee("ada", 85000, 1998,12 , 21);
 		employees[1]= new Employee("sol", 80000, 1995,11 , 26);
 		employees[2]= new Employee("luna", 70000, 1994,10 , 29);
+		employees[3]=new Employee("user");
 		
 		for(Employee employee:employees) {
 			employee.upgradeSalary(5);

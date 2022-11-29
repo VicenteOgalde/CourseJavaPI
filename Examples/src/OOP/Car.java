@@ -15,6 +15,12 @@ public class Car {
 		this.motor=motor;
 		this.weight=weight;
 	}
+	public Car() {
+		this.wheels=4;
+		this.length=4;
+		this.width=2;
+		this.motor=1600;
+	}
 
 	public int getWheels() {
 		return wheels;
