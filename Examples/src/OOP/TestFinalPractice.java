@@ -13,6 +13,8 @@ public class TestFinalPractice {
 		System.out.println("Employee: "+emp1.getName()+
 				" work in the section: "+emp1.getSection()+" with id: "+emp2.getId());
 		
+		System.out.println(EmployeeTest.getNextId());
+		
 
 	}
 
@@ -39,6 +41,9 @@ class EmployeeTest{
 	}
 	public int getId() {
 		return this.id;
+	}
+	public static String getNextId() {
+		return "the next id is : "+nextId;
 	}
 
 }
