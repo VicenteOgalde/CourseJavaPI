@@ -34,6 +34,9 @@ public class Employee {
 	public Date getContractF() {
 		return this.contractF;
 	}
+	public void setContractF(Date date) {
+		this.contractF=date;
+	}
 	public void upgradeSalary(double percentage) {
 		this.salary=this.salary+(this.salary*percentage/100);
 	}
