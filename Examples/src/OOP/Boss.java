@@ -15,8 +15,8 @@ public class Boss extends Employee {
 	public void setBonus(double bonus) {
 		this.bonus = bonus;
 	}
-	public double getSalary(){
-		double sb=super.getSalary();
+	public double getSalary(){//override the method of the father class or super class
+		double sb=super.getSalary();//call the method for the father class
 		return sb+bonus;
 	}
 }

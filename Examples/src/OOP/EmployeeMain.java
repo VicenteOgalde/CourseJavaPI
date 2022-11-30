@@ -14,13 +14,22 @@ public class EmployeeMain {
 		System.out.println("Name : "+employee.getName()+"with salary : "+employee.getSalary()+
 				",date finish contract: "+employee.getContractF());*/
 		
-		Employee [] employees=new Employee[4];
+		Boss bossRRHH = new Boss("jon",100000,2000,12,12);
+		
+		bossRRHH.setBonus(25000);
+		
+		
+		Employee [] employees=new Employee[5];
+		
 		employees[0]= new Employee("ada", 85000, 1998,12 , 21);
 		employees[1]= new Employee("sol", 80000, 1995,11 , 26);
 		employees[2]= new Employee("luna", 70000, 1994,10 , 29);
 		employees[3]=new Employee("user");
+		employees[4]=bossRRHH;//polymorphism in action. substitution principle
 		
-		for(Employee employee:employees) {
+		for(Employee employee:employees) {//variable employee automatically 
+			//switches when needed to another class from class Employee to Boss
+			//calling the method getSalary() from the subclass Boss when required
 			employee.upgradeSalary(5);
 			System.out.println("Name: "+employee.getName()+" have this salary now: "+employee.getSalary());
 		}
