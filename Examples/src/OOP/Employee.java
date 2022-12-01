@@ -3,7 +3,7 @@ package oop;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Employee {
+public class Employee implements Comparable<Employee>{
 	
 	private String name;
 	private double salary;
@@ -39,6 +39,18 @@ public class Employee {
 	}
 	public void upgradeSalary(double percentage) {
 		this.salary=this.salary+(this.salary*percentage/100);
+	}
+	@Override
+	public int compareTo(Employee o) {
+		if(this.getSalary()<o.getSalary()) {
+			return -1;
+		}else if(this.getSalary()>o.getSalary()) {
+			return 1;
+		}else {
+			return 0;
+		}
+		
+		
 	}
 	
 

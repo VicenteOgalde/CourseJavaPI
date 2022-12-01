@@ -1,5 +1,7 @@
 package oop;
 
+import java.util.Arrays;
+
 public class EmployeeMain {
 
 	public static void main(String[] args) throws CloneNotSupportedException{
@@ -37,7 +39,7 @@ public class EmployeeMain {
 		bossARQ.setContractF(null);
 		employees[6]=bossARQ;
 		
-		
+		Arrays.sort(employees);
 		
 		for(Employee employee:employees) {//variable employee automatically 
 			//switches when needed to another class from class Employee to Boss
