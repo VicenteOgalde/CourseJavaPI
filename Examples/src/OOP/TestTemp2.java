@@ -31,6 +31,20 @@ class Watch{
 		this.sonic=sonic;
 	}
 	public void start() {
+		class GiveAnHour2 implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Date date = new Date();
+				System.out.println("time every 2 sec: "+date);
+				if(sonic) {
+					Toolkit.getDefaultToolkit().beep();
+				}
+				
+			}
+			
+		}
 		ActionListener e = new GiveAnHour2();
 		
 		Timer meTimer= new Timer(interval,e);
@@ -39,18 +53,5 @@ class Watch{
 		
 		
 	}
-	private class GiveAnHour2 implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			Date date = new Date();
-			System.out.println("time every 2 sec: "+date);
-			if(sonic) {
-				Toolkit.getDefaultToolkit().beep();
-			}
-			
-		}
-		
-	}
+	
 }
