@@ -1,4 +1,4 @@
-package OOP;
+package oop;
 
 public final class Boss extends Employee implements Cloneable {
 	
