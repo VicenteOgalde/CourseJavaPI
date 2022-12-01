@@ -3,7 +3,7 @@ package oop;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Employee implements Comparable<Employee>{
+public class Employee implements Comparable<Employee>,Employees{
 	
 	private String name;
 	private double salary;
@@ -51,6 +51,11 @@ public class Employee implements Comparable<Employee>{
 		}
 		
 		
+	}
+	@Override
+	public double setBonusEndOfYear(double bonusYear) {
+		// TODO Auto-generated method stub
+		return Employees.bonus+bonusYear;
 	}
 	
 

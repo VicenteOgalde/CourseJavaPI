@@ -1,6 +1,6 @@
 package oop;
 
-public interface Bosses {
+public interface Bosses extends Employees{
 	
 	String takeDesicions(String decision);
 

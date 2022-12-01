@@ -37,4 +37,7 @@ public final class Boss extends Employee implements Cloneable,Bosses {
 		// TODO Auto-generated method stub
 		return "the desicion is: "+desicions;
 	}
+	public double setBonusEndOfYear(double bonusYear) {
+		return Employees.bonus+bonusYear;
+	}
 }

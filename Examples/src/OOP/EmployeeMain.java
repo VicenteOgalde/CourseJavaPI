@@ -38,6 +38,7 @@ public class EmployeeMain {
 		bossARQ.setBonus(500000);
 		bossARQ.setContractF(null);
 		employees[6]=bossARQ;
+		System.out.println(bossADM.setBonusEndOfYear(500));
 		
 		Arrays.sort(employees);
 		
