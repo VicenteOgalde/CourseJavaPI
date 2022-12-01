@@ -1,5 +1,6 @@
 package oop;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -16,7 +17,8 @@ public class TestTemp {
 		Timer meTimer= new Timer(2000,giveAnHour);
 		
 		meTimer.start();
-		JOptionPane.showMessageDialog(null, "press accept for stop");
+		JOptionPane.showMessageDialog(null, "press ok for stop");
+		System.exit(0);
 		
 	}
 
@@ -26,7 +28,8 @@ class GiveAnHour implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Date date = new Date();
-		System.out.println("date every 5 sec "+date);
+		System.out.println("date every 2 sec "+date);
+		Toolkit.getDefaultToolkit().beep();
 		
 	}
 	
