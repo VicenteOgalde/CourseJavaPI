@@ -1,6 +1,6 @@
 package oop;
 
-public final class Boss extends Employee implements Cloneable {
+public final class Boss extends Employee implements Cloneable,Bosses {
 	
 	private double bonus;
 
@@ -30,5 +30,11 @@ public final class Boss extends Employee implements Cloneable {
 		Boss x = (Boss) super.clone();
 		
 		return x;
+	}
+
+	@Override
+	public String takeDesicions(String desicions) {
+		// TODO Auto-generated method stub
+		return "the desicion is: "+desicions;
 	}
 }

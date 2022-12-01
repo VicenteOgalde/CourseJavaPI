@@ -41,6 +41,18 @@ public class EmployeeMain {
 		
 		Arrays.sort(employees);
 		
+		Employee comercialDirector = new Boss("jin",140000,2000,6,23);
+		Comparable example = new Employee("exampleInterfaz",10000,2001,5,22);
+		
+		if(comercialDirector instanceof Employee) {
+			System.out.println("Comercial director is instance of Employee");
+		}
+		if(example instanceof Comparable) {
+			System.out.println("example is an instance of comparable");
+		}
+		
+		System.out.println(bossADM.takeDesicions("more vacations days"));
+		
 		for(Employee employee:employees) {//variable employee automatically 
 			//switches when needed to another class from class Employee to Boss
 			//calling the method getSalary() from the subclass Boss when required
