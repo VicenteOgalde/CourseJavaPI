@@ -16,13 +16,14 @@ public class ExThrow {
 
 	}
 
-	static void checkEmail(String email) throws Exception {
+	static void checkEmail(String email) throws EmailRangeException {
 		int check = 0;
 		boolean check2 = false;
 
 		if (email.length() <= 3) {
 			//Exception e = new Exception();
-			throw new Exception();
+			//throw new Exception();
+			throw new EmailRangeException("The email is to short to be real");
 		}
 		
 			for (int i = 0; i < email.length(); i++) {
@@ -41,4 +42,10 @@ public class ExThrow {
 		
 	}
 
+}
+class EmailRangeException extends Exception{
+	public EmailRangeException() {}
+	public EmailRangeException(String message) {
+		super(message);
+	}
 }
