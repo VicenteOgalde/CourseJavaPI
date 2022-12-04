@@ -1,10 +1,10 @@
-package fileWriting;
+package fileReading;
 
 
 import java.io.FileReader;
 import java.io.IOException;
 
-public class AccesFile {
+public class AccessFile {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -25,10 +25,12 @@ class ReadFile{
 				char letter=(char)c;
 				System.out.print(letter);
 			}
+			dataIn.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("File Not Found");
 			e.printStackTrace();
 		}
+		
 	}
 }
