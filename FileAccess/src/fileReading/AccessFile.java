@@ -1,6 +1,7 @@
 package fileReading;
 
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -18,16 +19,24 @@ class ReadFile{
 	
 	public void read() {
 		try {
-			FileReader dataIn= new FileReader("D:/Proyectos JAVA/CursoPildorasInformaticas/Readme.txt");
-			int c=0;
+			FileReader dataIn= new FileReader("D:/Proyectos JAVA/CursoPildorasInformaticas/FileAccess/TestText/newText.txt");
+			BufferedReader meBuffer= new BufferedReader(dataIn);
+			String line ="";
+			/*int c=0;
 			while(c!=-1) {
 				c=dataIn.read();
 				char letter=(char)c;
 				System.out.print(letter);
+			}*/
+			while(line!=null) {
+				line=meBuffer.readLine();
+				if(line!=null) {
+				System.out.println(line);
+				}
 			}
 			dataIn.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			System.out.println("File Not Found");
 			e.printStackTrace();
 		}

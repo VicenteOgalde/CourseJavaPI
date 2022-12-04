@@ -1,5 +1,6 @@
 package fileWriting;
 
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -22,6 +23,8 @@ class Writing{
 		
 		try {
 			FileWriter fileWriter = new FileWriter("D:/Proyectos JAVA/CursoPildorasInformaticas/FileAccess/TestText/newText.txt");
+			
+			
 			for(int i=0;i<phrase.length();i++) {
 				fileWriter.write(phrase.charAt(i));
 			}
