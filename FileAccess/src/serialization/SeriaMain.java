@@ -15,13 +15,13 @@ public class SeriaMain {
 		employees[0]=boss1;
 		employees[1]=new Employee("moon", 10000, 1990, 10, 20);
 		employees[2]=new Employee("ton", 11000, 1995, 10, 22);
-		try {
+		try {/*
 			ObjectOutputStream writeObj= new ObjectOutputStream
 					(new FileOutputStream("D:/Proyectos JAVA/"
 							+ "CursoPildorasInformaticas/"
 							+ "FileAccess/TestObj/ObjTestWrite.dat"));
 			writeObj.writeObject(employees);
-			writeObj.close();
+			writeObj.close();*/
 			ObjectInputStream readObj= new ObjectInputStream(new FileInputStream(
 					"D:/Proyectos JAVA/"
 							+ "CursoPildorasInformaticas/"

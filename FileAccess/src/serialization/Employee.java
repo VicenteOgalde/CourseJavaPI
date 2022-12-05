@@ -5,6 +5,10 @@ import java.util.GregorianCalendar;
 
 public class Employee implements Comparable<Employee>,Employees,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;//for read the file with changes
 	private String name;
 	private double salary;
 	private Date contractF;

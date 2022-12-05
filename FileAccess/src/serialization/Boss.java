@@ -2,6 +2,10 @@ package serialization;
 
 public final class Boss extends Employee implements Cloneable,Bosses {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double bonus;
 
 	public Boss(String name,double salary,int year,int month,int day) {
