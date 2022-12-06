@@ -138,37 +138,86 @@ class ReboundFrame extends JFrame{
 		
 		JPanel sheetBoton=new JPanel();
 		
-		putButton(sheetBoton, "Go!", new ActionListener(){
+		b1=new JButton("thread 1");
+		b1.addActionListener(new ActionListener() {
 			
-			public void actionPerformed(ActionEvent event){
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				
-				gameStart();
-			}
-			
-		});
-		
-		
-		putButton(sheetBoton, "Exit", new ActionListener(){
-			
-			public void actionPerformed(ActionEvent event){
-				
-				System.exit(0);
+				gameStart(e);
 				
 			}
-			
-			
 		});
+		
+		sheetBoton.add(b1);
+		
+		b2=new JButton("thread 2");
+		b2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				gameStart(e);
+				
+			}
+		});
+		
+		sheetBoton.add(b2);
+		
 
-		putButton(sheetBoton, "Stop", new ActionListener(){
+		b3=new JButton("thread 3");
+		b3.addActionListener(new ActionListener() {
 			
-			public void actionPerformed(ActionEvent event){
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				
-				//t.stop();
-				t.interrupt();
+				gameStart(e);
+				
 			}
-			
-			
 		});
+		
+		sheetBoton.add(b3);
+		
+		st1=new JButton("Stop 1");
+		st1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				stop(t1);
+				
+			}
+		});
+		
+		sheetBoton.add(st1);
+		
+		st2=new JButton("Stop 2");
+		st2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				stop(t2);
+				
+			}
+		});
+		
+		sheetBoton.add(st2);
+		
+		st3=new JButton("Stop 3");
+		st3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				stop(t3);
+				
+			}
+		});
+		
+		sheetBoton.add(st3);
+		
+		
 		
 		add(sheetBoton, BorderLayout.SOUTH);
 	}
@@ -188,7 +237,7 @@ class ReboundFrame extends JFrame{
 	
 	//Add ball and boot 1000 times
 	
-	public void gameStart (){
+	public void gameStart (ActionEvent e){
 		
 					
 			Ball ball=new Ball();
@@ -197,22 +246,36 @@ class ReboundFrame extends JFrame{
 			
 			Runnable r=new BallThread(ball, sheet);
 			
+			if(e.getSource().equals("b1")) {
+				t1 = new Thread(r);
+				t1.start();
+			}else if(e.getSource().equals("b2")) {
+				t2 = new Thread(r);
+				t2.start();
+			}else if(e.getSource().equals("b3")) {
+				t3 = new Thread(r);
+				t3.start();
+			}
+			
 			//Thread t = new Thread(r);
-			t = new Thread(r);
-			t.start();
+			//t = new Thread(r);
+			//t.start();
 			
 			
 			
 		
 		
+	}
+	public void stop(Thread t) {
+		t.interrupt();;
 	}
 	
-	public void stop() {
-		t.stop();
-	}
+
 	
 	private SheetBall sheet;
-	 private Thread t;
+	 private Thread t1,t2,t3;
+	 private JButton b1,b2,b3,st1,st2,st3;
+	 
 	
 	
 }
