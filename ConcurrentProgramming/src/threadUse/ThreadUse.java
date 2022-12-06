@@ -156,6 +156,18 @@ class ReboundFrame extends JFrame{
 				
 			}
 			
+			
+		});
+
+		putButton(sheetBoton, "Stop", new ActionListener(){
+			
+			public void actionPerformed(ActionEvent event){
+				
+				//t.stop();
+				t.interrupt();
+			}
+			
+			
 		});
 		
 		add(sheetBoton, BorderLayout.SOUTH);
@@ -185,16 +197,22 @@ class ReboundFrame extends JFrame{
 			
 			Runnable r=new BallThread(ball, sheet);
 			
-			Thread t = new Thread(r);
-			
+			//Thread t = new Thread(r);
+			t = new Thread(r);
 			t.start();
+			
 			
 			
 		
 		
 	}
 	
+	public void stop() {
+		t.stop();
+	}
+	
 	private SheetBall sheet;
+	 private Thread t;
 	
 	
 }

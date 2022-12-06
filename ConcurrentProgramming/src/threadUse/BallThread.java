@@ -15,21 +15,24 @@ public class BallThread implements Runnable{
 	@Override
 	public void run() {
 		
-		for (int i=1; i<=3000; i++){
-			
+		System.out.println(Thread.currentThread().isInterrupted());
+		
+		//for (int i=1; i<=3000; i++){
+			while(!Thread.currentThread().isInterrupted()) {
 			ball.ball_move(component.getBounds());    
 			
 			component.paint(component.getGraphics());
-			
+		/*	
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 
-			
+		
 		}
+			System.out.println(Thread.currentThread().isInterrupted());	
 		
 	}
 
