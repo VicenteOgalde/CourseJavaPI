@@ -22,11 +22,12 @@ public class BallThread implements Runnable{
 			ball.ball_move(component.getBounds());    
 			
 			component.paint(component.getGraphics());
-		/*	
+			/*
 			try {
-				Thread.sleep(1);
+				Thread.sleep(4);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
+				Thread.currentThread().interrupt();
 				e.printStackTrace();
 			}*/
 
