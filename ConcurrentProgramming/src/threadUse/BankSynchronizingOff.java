@@ -26,20 +26,20 @@ class Bank extends ReentrantLock{
 	
 	private final double[] accounts;
 	//private Lock lock = new ReentrantLock();
-	private Condition enoughBalance;
+	//private Condition enoughBalance;
 	
 	public Bank () {
 		accounts= new double[100];
 		for(int i=0;i<accounts.length;i++) {
 			accounts[i]=2000;
 		}
-		this.enoughBalance=this.newCondition();
+		//this.enoughBalance=this.newCondition();
 	}
-	public void transfer(int origin,int destiny,double amount)throws InterruptedException {
-		this.lock();
+	public synchronized void transfer(int origin,int destiny,double amount)throws InterruptedException {
+		//this.lock();
 		
 		//lock.lock();
-		try {
+		//try {
 		while(accounts[origin]<amount) {
 			
 			
@@ -49,8 +49,11 @@ class Bank extends ReentrantLock{
 			System.out.println("-------------Account n° "+origin+"-----------------");
 			System.out.println("-------------Amount :"+accounts[origin]+"---------------");
 			*/
-			this.enoughBalance.await();
+		//	this.enoughBalance.await();
 			System.err.println(Thread.currentThread()); 
+			
+			wait();
+			
 		}
 		
 		
@@ -60,13 +63,15 @@ class Bank extends ReentrantLock{
 		accounts[destiny]+=amount;
 		System.out.printf(" Total Balance: %10.2f%n",getTotalBalance());
 		
-		this.enoughBalance.signalAll();
-		}catch(Exception e) {
+		notifyAll();
+		
+		//this.enoughBalance.signalAll();
+	//	}catch(Exception e) {
 			
-		}finally {
+	//	}finally {
 			//lock.unlock();
-			this.unlock();
-		}
+			//this.unlock();
+	//	}
 	}
 	public double getTotalBalance() {
 		double totalBalance=0;
