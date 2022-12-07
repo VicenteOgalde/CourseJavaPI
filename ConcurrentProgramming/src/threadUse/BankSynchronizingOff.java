@@ -1,6 +1,7 @@
 package threadUse;
 
-import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.Condition;
+//import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class BankSynchronizingOff {
@@ -25,19 +26,31 @@ class Bank extends ReentrantLock{
 	
 	private final double[] accounts;
 	//private Lock lock = new ReentrantLock();
+	private Condition enoughBalance;
 	
 	public Bank () {
 		accounts= new double[100];
 		for(int i=0;i<accounts.length;i++) {
 			accounts[i]=2000;
 		}
+		this.enoughBalance=this.newCondition();
 	}
-	public void transfer(int origin,int destiny,double amount) {
+	public void transfer(int origin,int destiny,double amount)throws InterruptedException {
 		this.lock();
+		
 		//lock.lock();
 		try {
-		if(accounts[origin]<amount) {
-			return;
+		while(accounts[origin]<amount) {
+			
+			
+			
+			/*
+			System.out.println("-------------Insufficients funds--------------");
+			System.out.println("-------------Account n° "+origin+"-----------------");
+			System.out.println("-------------Amount :"+accounts[origin]+"---------------");
+			*/
+			this.enoughBalance.await();
+			System.err.println(Thread.currentThread()); 
 		}
 		
 		
@@ -46,6 +59,8 @@ class Bank extends ReentrantLock{
 		System.out.printf(" %10.2f of %d for %d ",amount,origin,destiny);
 		accounts[destiny]+=amount;
 		System.out.printf(" Total Balance: %10.2f%n",getTotalBalance());
+		
+		this.enoughBalance.signalAll();
 		}catch(Exception e) {
 			
 		}finally {
