@@ -9,8 +9,12 @@ public class BookImpl {
 		
 		if(book1.equals(book2)) {
 			System.out.println("same");
+			System.out.println(book1.hashCode());
+			System.out.println(book2.hashCode());
 		}else {
 			System.out.println("not the same");
+			System.out.println(book1.hashCode());
+			System.out.println(book2.hashCode());
 		}
 
 	}
