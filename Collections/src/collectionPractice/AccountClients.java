@@ -1,6 +1,7 @@
 package collectionPractice;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class AccountClients {
@@ -19,12 +20,34 @@ public class AccountClients {
 		clientsBank.add(cl3);
 		clientsBank.add(cl4);
 		clientsBank.add(cl5);
+		/*
+		for (Client client : clientsBank) {
+			System.out.println(client.getName()
+					+" "+client.getAccNumber());
+			if(client.getName().equals("greg")) {
+				clientsBank.remove(client);
+			}
+		}
+	
+		Iterator<Client> it=clientsBank.iterator();
 		
+		while(it.hasNext()) {
+			String clientName=it.next().getName();
+			System.out.println(clientName);
+		}*/
+		
+		Iterator<Client> it=clientsBank.iterator();
+		while(it.hasNext()) {
+			String clientName=it.next().getName();
+			System.out.println(clientName);
+			if(clientName.equals("greg")) {
+				it.remove();
+			}
+			}
 		for (Client client : clientsBank) {
 			System.out.println(client.getName()
 					+" "+client.getAccNumber());
 		}
-		
 		
 	}
 
