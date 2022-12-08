@@ -31,30 +31,39 @@ public class TreeSetTest {
 		for (Items item : items) {
 			System.out.println(item.getDescription());
 		}
-		
+		/*
 		Items comparator = new Items();
 		
 		TreeSet<Items> sortItems= new TreeSet<Items>(comparator);//use interfaz comparator for sort with string
+		*/
+		//CompareItem compareItem = new CompareItem();//using a class for sort items object
+		
+		TreeSet<Items> sortItems= new TreeSet<Items>((a,b)->{
+			return a.getDescription().compareTo(b.getDescription());
+		});
 		
 		sortItems.addAll(items);
 		
+		sortItems.forEach(a->System.out.println(a.getDescription()));
+		
+		/*
 		for (Items item : sortItems) {
 			System.out.println(item.getDescription());
-		}
+		}*/
 
 	}
 
 }
 
-class Items implements Comparable<Items>,Comparator<Items> {
+class Items implements Comparable<Items>/*,Comparator<Items>*/ {
 
 	private int id;
 	private String description;
 	
-
+/*
 	public Items() {
 		
-	}
+	}*/
 
 	public Items(int id, String description) {
 		this.id = id;
@@ -82,7 +91,7 @@ class Items implements Comparable<Items>,Comparator<Items> {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+/*
 	@Override
 	public int compare(Items o1, Items o2) {
 		
@@ -91,5 +100,27 @@ class Items implements Comparable<Items>,Comparator<Items> {
 		
 		return descriptionA.compareTo(descriptionB);
 	}
-
+*/
 }
+
+class CompareItem implements Comparator<Items>{
+
+	@Override
+	public int compare(Items o1, Items o2) {
+		
+		return o1.getDescription().compareTo(o2.getDescription());
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
