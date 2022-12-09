@@ -1,6 +1,10 @@
 package sockets;
 
 import java.awt.BorderLayout;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,7 +21,7 @@ public class Server {
 
 }
 
-class ServerFrame extends JFrame{
+class ServerFrame extends JFrame implements Runnable{
 	
 	public ServerFrame() {
 		
@@ -28,6 +32,27 @@ class ServerFrame extends JFrame{
 		meSheet.add(areaText,BorderLayout.CENTER);
 		add(meSheet);
 		setVisible(true);
+		Thread meThread = new Thread(this);
+		meThread.start();
+	}
+	
+	@Override
+	public void run() {
+		try {
+			ServerSocket serverSocket = new ServerSocket(9095);
+			while(true) {
+			Socket meSocket= serverSocket.accept();
+			DataInputStream inputFlow =new DataInputStream(meSocket.getInputStream());
+			String messageText = inputFlow.readUTF();
+			areaText.append("\n"+messageText);
+			meSocket.close();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	private JTextArea areaText;
 }

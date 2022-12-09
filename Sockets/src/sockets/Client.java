@@ -2,6 +2,7 @@ package sockets;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -54,6 +55,9 @@ class SheetFrameClient extends JPanel{
 			
 			try {
 				Socket meSocket= new Socket("192.168.100.122", 9095);
+				DataOutputStream outletFlow = new DataOutputStream(meSocket.getOutputStream());
+				outletFlow.writeUTF(field1.getText());
+				outletFlow.close();
 			} catch (UnknownHostException e1) {
 				e1.printStackTrace();
 			} catch (IOException e1) {
