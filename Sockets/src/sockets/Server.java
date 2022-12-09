@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -59,6 +60,10 @@ class ServerFrame extends JFrame implements Runnable{
 			areaText.append("\n"+data.getNick()+": "+data.getMessage()
 			+" for "+data.getIp());
 			
+			Socket sendToDestiny = new Socket(data.getIp(),9090);
+			ObjectOutputStream reSendData = new ObjectOutputStream(sendToDestiny.getOutputStream());
+			reSendData.writeObject(data);
+			reSendData.close();
 			meSocket.close();
 			}
 		} catch (IOException | ClassNotFoundException e) {

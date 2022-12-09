@@ -2,10 +2,11 @@ package sockets;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -38,9 +39,13 @@ class ClientFrame extends JFrame{
 	}
 	
 }
-class SheetFrameClient extends JPanel{
+class SheetFrameClient extends JPanel implements Runnable{
 	
 	public SheetFrameClient() {
+		
+		Thread meThread = new Thread(this);
+		meThread.start();
+		
 		nick=new JTextField(5);
 		add(nick);
 		
@@ -97,6 +102,33 @@ class SheetFrameClient extends JPanel{
 	private JTextField field1,nick,ip;
 	private JButton meButton;
 	private JTextArea chatField;
+	
+	@Override
+	public void run() {
+		
+		try {
+			
+			ServerSocket serverClient = new ServerSocket(9090);
+			Socket client;
+			
+			SendSet receivedData;
+			while(true) {
+				client=serverClient.accept();
+				
+				ObjectInputStream dataIn = new ObjectInputStream(client.getInputStream());
+				
+				receivedData=(SendSet) dataIn.readObject();
+				
+				chatField.append("\n"+receivedData.getNick()+" :"
+						+receivedData.getMessage());
+				
+			}
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
 	
 	
 }
