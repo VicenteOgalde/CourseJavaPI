@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Client {
@@ -38,8 +39,19 @@ class ClientFrame extends JFrame{
 class SheetFrameClient extends JPanel{
 	
 	public SheetFrameClient() {
-		JLabel text = new JLabel("CLIENT");
+		nick=new JTextField(5);
+		add(nick);
+		
+		
+		JLabel text = new JLabel("---CHAT---");
 		add(text);
+		
+		ip=new JTextField(8);
+		
+		add(ip);
+			
+		chatField=new JTextArea(12,20);
+		add(chatField);
 		field1=new JTextField(20);
 		add(field1);
 		meButton= new JButton("SEND");
@@ -68,8 +80,9 @@ class SheetFrameClient extends JPanel{
 		
 	}
 	
-	private JTextField field1;
+	private JTextField field1,nick,ip;
 	private JButton meButton;
+	private JTextArea chatField;
 	
 	
 }
