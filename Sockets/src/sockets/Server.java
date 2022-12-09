@@ -3,6 +3,7 @@ package sockets;
 import java.awt.BorderLayout;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -40,14 +41,27 @@ class ServerFrame extends JFrame implements Runnable{
 	public void run() {
 		try {
 			ServerSocket serverSocket = new ServerSocket(9095);
+			//String nick,ip,message;
+			
+			SendSet data;
+			
 			while(true) {
 			Socket meSocket= serverSocket.accept();
+			
+			ObjectInputStream inputData = new ObjectInputStream(meSocket.getInputStream());
+			data= (SendSet) inputData.readObject();
+			
+			/*
 			DataInputStream inputFlow =new DataInputStream(meSocket.getInputStream());
 			String messageText = inputFlow.readUTF();
 			areaText.append("\n"+messageText);
+			*/
+			areaText.append("\n"+data.getNick()+": "+data.getMessage()
+			+" for "+data.getIp());
+			
 			meSocket.close();
 			}
-		} catch (IOException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

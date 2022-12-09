@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -67,9 +69,21 @@ class SheetFrameClient extends JPanel{
 			
 			try {
 				Socket meSocket= new Socket("192.168.100.122", 9095);
+				
+				SendSet data = new SendSet();
+				
+				data.setNick(nick.getText());
+				data.setIp(ip.getText());
+				data.setMessage(field1.getText());
+				
+				ObjectOutputStream OutputData = new ObjectOutputStream(meSocket.getOutputStream());
+				OutputData.writeObject(data);
+				meSocket.close();
+				
+				/*
 				DataOutputStream outletFlow = new DataOutputStream(meSocket.getOutputStream());
 				outletFlow.writeUTF(field1.getText());
-				outletFlow.close();
+				outletFlow.close();*/
 			} catch (UnknownHostException e1) {
 				e1.printStackTrace();
 			} catch (IOException e1) {
@@ -87,6 +101,34 @@ class SheetFrameClient extends JPanel{
 	
 }
 
+class SendSet implements Serializable{
+	
+	private String nick;
+	private String ip;
+	private String message;
+	
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	
+	
+}
 
 
 
