@@ -21,7 +21,7 @@ public class TestConexion {
 			//read the resultset
 			while(meResultSet.next()) {
 				System.out.println(
-						"Id: "+meResultSet.getString("id_estudiante")+" RUT:"+
+						"Id: "+meResultSet.getInt(1)+" RUT:"+
 						meResultSet.getString("rut")+" Name: "+
 						meResultSet.getString("nombre")
 						);
