@@ -11,8 +11,10 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -43,17 +45,29 @@ class SheetFrameClient extends JPanel implements Runnable{
 	
 	public SheetFrameClient() {
 		
+		
 		Thread meThread = new Thread(this);
 		meThread.start();
 		
-		nick=new JTextField(5);
+		String nickUser= JOptionPane.showInputDialog("Your nick is ? ");
+		
+		JLabel nick0= new JLabel("Nick: ");
+		add(nick0);
+		
+		
+		
+		nick=new JLabel();
+		
+		nick.setText(nickUser);
 		add(nick);
 		
 		
-		JLabel text = new JLabel("---CHAT---");
+		JLabel text = new JLabel("Online: ");
 		add(text);
 		
-		ip=new JTextField(8);
+		ip=new JComboBox();
+		ip.addItem("u1");
+		ip.addItem("u2");
 		
 		add(ip);
 			
@@ -80,7 +94,7 @@ class SheetFrameClient extends JPanel implements Runnable{
 				SendSet data = new SendSet();
 				
 				data.setNick(nick.getText());
-				data.setIp(ip.getText());
+				data.setIp(ip.getSelectedItem().toString());
 				data.setMessage(field1.getText());
 				
 				ObjectOutputStream OutputData = new ObjectOutputStream(meSocket.getOutputStream());
@@ -101,7 +115,9 @@ class SheetFrameClient extends JPanel implements Runnable{
 		
 	}
 	
-	private JTextField field1,nick,ip;
+	private JTextField field1;
+	private JComboBox ip;
+	private JLabel nick;
 	private JButton meButton;
 	private JTextArea chatField;
 	
