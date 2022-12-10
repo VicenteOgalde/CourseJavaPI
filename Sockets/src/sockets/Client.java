@@ -2,6 +2,8 @@ package sockets;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -38,9 +40,33 @@ class ClientFrame extends JFrame{
 		add(meSheet);
 		
 		setVisible(true);
+		
+		addWindowListener(new SendIpOnline());
 	}
 	
 }
+
+//--------------Sending online signal---------------------
+
+class SendIpOnline extends WindowAdapter{
+	public void windowOpened(WindowEvent e) {
+		try {
+			Socket meSocket=new Socket("192.168.100.122",9095);
+			SendSet data = new SendSet();
+			data.setMessage("online");
+			
+			ObjectOutputStream dataOut= new ObjectOutputStream(meSocket.getOutputStream());
+			dataOut.writeObject(data);
+			meSocket.close();
+			dataOut.close();
+			
+		}catch(Exception e1) {
+			System.out.println(e1.getMessage());
+		}
+		
+	}
+}
+
 class SheetFrameClient extends JPanel implements Runnable{
 	
 	public SheetFrameClient() {

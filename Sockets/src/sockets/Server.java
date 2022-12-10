@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -48,6 +49,12 @@ class ServerFrame extends JFrame implements Runnable{
 			
 			while(true) {
 			Socket meSocket= serverSocket.accept();
+			
+			//--------------------------//
+			
+			InetAddress location = meSocket.getInetAddress();
+			String remoteIp = location.getHostAddress();
+			System.out.println(remoteIp);
 			
 			ObjectInputStream inputData = new ObjectInputStream(meSocket.getInputStream());
 			data= (SendSet) inputData.readObject();
