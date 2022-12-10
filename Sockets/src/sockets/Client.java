@@ -72,6 +72,8 @@ class SheetFrameClient extends JPanel implements Runnable{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
+			chatField.append("\n"+"Me: "+field1.getText());
+			
 			try {
 				Socket meSocket= new Socket("192.168.100.122", 9095);
 				
@@ -118,6 +120,7 @@ class SheetFrameClient extends JPanel implements Runnable{
 				ObjectInputStream dataIn = new ObjectInputStream(client.getInputStream());
 				
 				receivedData=(SendSet) dataIn.readObject();
+				
 				
 				chatField.append("\n"+receivedData.getNick()+" :"
 						+receivedData.getMessage());

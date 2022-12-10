@@ -64,6 +64,7 @@ class ServerFrame extends JFrame implements Runnable{
 			ObjectOutputStream reSendData = new ObjectOutputStream(sendToDestiny.getOutputStream());
 			reSendData.writeObject(data);
 			reSendData.close();
+			sendToDestiny.close();
 			meSocket.close();
 			}
 		} catch (IOException | ClassNotFoundException e) {
