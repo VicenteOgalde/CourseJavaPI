@@ -84,8 +84,16 @@ class ServerFrame extends JFrame implements Runnable{
 				ipList.add(remoteIp);
 				data.setIpList(ipList);
 				
-				for (String string : ipList) {
-					System.out.println(string);
+				for (String s : ipList) {
+
+					Socket sendToDestiny = new Socket(s,9090);
+					ObjectOutputStream reSendData = new ObjectOutputStream(sendToDestiny.getOutputStream());
+					reSendData.writeObject(data);
+							
+					reSendData.close();
+					sendToDestiny.close();
+					meSocket.close();
+					
 				}
 			}
 			}

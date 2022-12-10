@@ -93,8 +93,7 @@ class SheetFrameClient extends JPanel implements Runnable{
 		add(text);
 		
 		ip=new JComboBox();
-		ip.addItem("u1");
-		ip.addItem("u2");
+		
 		
 		add(ip);
 			
@@ -163,10 +162,22 @@ class SheetFrameClient extends JPanel implements Runnable{
 				ObjectInputStream dataIn = new ObjectInputStream(client.getInputStream());
 				
 				receivedData=(SendSet) dataIn.readObject();
+			
+				
+				if(!receivedData.getMessage().equals(" online")) {
+					chatField.append("\n"+receivedData.getNick()+" :"
+							+receivedData.getMessage());
+				}else {
+					
+					ArrayList<String> listIp = new ArrayList<String>();
+					listIp=receivedData.getIpList();
+					ip.removeAllItems();
+					listIp.forEach(e-> ip.addItem(e));
+					
+				}
 				
 				
-				chatField.append("\n"+receivedData.getNick()+" :"
-						+receivedData.getMessage());
+				
 				
 			}
 			
