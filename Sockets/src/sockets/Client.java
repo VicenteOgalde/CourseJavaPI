@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -53,7 +54,7 @@ class SendIpOnline extends WindowAdapter{
 		try {
 			Socket meSocket=new Socket("192.168.100.122",9095);
 			SendSet data = new SendSet();
-			data.setMessage("online");
+			data.setMessage(" online");
 			
 			ObjectOutputStream dataOut= new ObjectOutputStream(meSocket.getOutputStream());
 			dataOut.writeObject(data);
@@ -183,7 +184,14 @@ class SendSet implements Serializable{
 	private String nick;
 	private String ip;
 	private String message;
+	private ArrayList<String> ipList;
 	
+	public ArrayList<String> getIpList() {
+		return ipList;
+	}
+	public void setIpList(ArrayList<String> ipList) {
+		this.ipList = ipList;
+	}
 	public String getNick() {
 		return nick;
 	}
