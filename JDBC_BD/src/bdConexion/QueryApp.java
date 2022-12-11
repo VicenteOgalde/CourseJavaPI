@@ -33,9 +33,15 @@ class FrameApp extends JFrame{
 	private Connection meConnection;
 	private JComboBox region,comuna;
 	private JTextArea result;
-	private PreparedStatement ps;
+	private PreparedStatement psCom;
+	private PreparedStatement psReg;
+	private PreparedStatement psComAndReg;
 	private final String selectQueryRegion="Select id,nombre,comuna,region"
 			+" from persona where region=?";
+	private final String selectQueryComuna="Select id,nombre,comuna,region"
+			+" from persona where comuna=?";
+	private final String selectQueryComunaAndRegion="Select id,nombre,comuna,region"
+			+" from persona where comuna=? and region=?";
 	
 	public FrameApp() {
 		
@@ -62,6 +68,7 @@ class FrameApp extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				executeQueryR();
 				
 			}
@@ -100,11 +107,30 @@ class FrameApp extends JFrame{
 	}
 	private void executeQueryR() {
 		ResultSet rs=null;
+		this.result.setText("");
 		try {
 			String regionQ=(String) this.region.getSelectedItem();
-			ps=meConnection.prepareStatement(selectQueryRegion);
-			ps.setString(1, regionQ);
-			rs=ps.executeQuery();
+			String comunaQ=(String) this.comuna.getSelectedItem();
+			
+			if(!comunaQ.equals("All")&& regionQ.equals("All")) {
+				
+				psCom=meConnection.prepareStatement(selectQueryComuna);
+				psCom.setString(1, comunaQ);
+				rs=psCom.executeQuery();
+				
+			}else if(!regionQ.equals("All")&&comunaQ.equals("All")) {
+				psReg=meConnection.prepareStatement(selectQueryRegion);
+				psReg.setString(1, regionQ);
+				rs=psReg.executeQuery();
+				
+				
+			}else if(!regionQ.equals("All")&&!comunaQ.equals("All")) {
+				
+				psComAndReg=meConnection.prepareStatement(selectQueryComunaAndRegion);
+				psComAndReg.setString(1, comunaQ);
+				psComAndReg.setString(2, regionQ);
+				rs=psComAndReg.executeQuery();
+			}
 			while(rs.next()) {
 				result.append("\n Id: "+rs.getString(1)
 						+" name: "+rs.getString(2)
