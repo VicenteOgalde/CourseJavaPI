@@ -2,8 +2,11 @@ package bdConexion;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -27,8 +30,12 @@ public class QueryApp {
 }
 class FrameApp extends JFrame{
 	
+	private Connection meConnection;
 	private JComboBox region,comuna;
 	private JTextArea result;
+	private PreparedStatement ps;
+	private final String selectQueryRegion="Select id,nombre,comuna,region"
+			+" from persona where region=?";
 	
 	public FrameApp() {
 		
@@ -51,12 +58,20 @@ class FrameApp extends JFrame{
 		add(menu,BorderLayout.NORTH);
 		add(result,BorderLayout.CENTER);
 		JButton buttonQuery= new JButton("Query");
+		buttonQuery.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				executeQueryR();
+				
+			}
+		});
 		add(buttonQuery,BorderLayout.SOUTH);
 		
 		
 		try {
 			//1.create connection
-			Connection meConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/persona",
+			meConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/persona",
 					"root","");
 			//2. create statement
 			Statement meStatement = meConnection.createStatement();
@@ -82,5 +97,23 @@ class FrameApp extends JFrame{
 		}
 
 		
+	}
+	private void executeQueryR() {
+		ResultSet rs=null;
+		try {
+			String regionQ=(String) this.region.getSelectedItem();
+			ps=meConnection.prepareStatement(selectQueryRegion);
+			ps.setString(1, regionQ);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				result.append("\n Id: "+rs.getString(1)
+						+" name: "+rs.getString(2)
+						+" comuna: "+rs.getString(3)
+						+" region: "+rs.getString(4));
+			}
+			
+		}catch(Exception e) {
+			
+		}
 	}
 }

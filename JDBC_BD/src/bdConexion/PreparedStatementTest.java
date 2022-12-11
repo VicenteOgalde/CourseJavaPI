@@ -4,7 +4,7 @@ package bdConexion;
 import java.sql.*;
 
 
-public class PreparedStatement {
+public class PreparedStatementTest {
 
 	public static void main(String[] args) {
 		
@@ -13,7 +13,7 @@ public class PreparedStatement {
 			Connection meConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/curso",
 					"root","");
 			//2. Prepared statement
-			java.sql.PreparedStatement preparedStatement=meConnection.prepareStatement(
+			PreparedStatement preparedStatement=meConnection.prepareStatement(
 					"Select id,nombre,apellido from usuarios where apellido=? and nombre=?");
 			
 			//3. set parameters
