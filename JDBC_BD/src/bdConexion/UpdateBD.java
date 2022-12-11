@@ -16,20 +16,20 @@ public class UpdateBD {
 			//2. create statement
 			Statement meStatement = meConnection.createStatement();
 			
-			/*//Insert into db
+			//Insert into db
 			String instructionSQL= "INSERT INTO USUARIOS "
 					+ "(id,nombre,apellido,telefono)"
-					+" VALUES ('256','sun','moon','56+asd123')";
-			*/
+					+" VALUES ('2','sun','moon','56+asd123')";
+			
 			
 			/* //update name
 			String instructionSQL= "UPDATE USUARIOS SET nombre='greg' WHERE "
 					+ "id = '256' ";
 			*/
 			
-			 //Delete 
+			/* //Delete 
 			String instructionSQL= "DELETE FROM USUARIOS WHERE "
-					+ "nombre='greg'";
+					+ "nombre='greg'";*/
 			
 			meStatement.executeUpdate(instructionSQL);
 			
