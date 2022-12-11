@@ -73,6 +73,7 @@ class FrameApp extends JFrame{
 				
 			}
 		});
+		
 		add(buttonQuery,BorderLayout.SOUTH);
 		
 		
