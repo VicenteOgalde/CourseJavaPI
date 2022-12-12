@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import controller.LoadingComboBox;
+import controller.TextAreaLoad;
 
 public class FrameApp2 extends JFrame {
 
@@ -43,6 +44,7 @@ public class FrameApp2 extends JFrame {
 		JButton buttonQuery= new JButton("Query");
 		add(buttonQuery,BorderLayout.SOUTH);
 		addWindowListener(new LoadingComboBox(this));
+		buttonQuery.addActionListener(new TextAreaLoad(this));
 	}
 
 

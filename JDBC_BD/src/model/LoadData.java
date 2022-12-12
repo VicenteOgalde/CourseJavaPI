@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import controller.ConnectionQApp;
+
 
 public class LoadData {
 	
@@ -14,7 +14,7 @@ public class LoadData {
 	private ArrayList<String> regionArr= new ArrayList<String>();
 	private ConnectionQApp meConnection;
 	private ResultSet meResultSet;
-	private Person person=new Person();
+
 
 	public LoadData() {
 		super();
