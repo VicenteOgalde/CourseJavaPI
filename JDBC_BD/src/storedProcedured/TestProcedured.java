@@ -18,7 +18,7 @@ public class TestProcedured {
 			Connection meConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/persona",
 					"root","");
 			//2. create statement
-			CallableStatement meStatement = meConnection.prepareCall("{call showPersonRegion}");
+			CallableStatement meStatement = meConnection.prepareCall("{call showPersonRegionBio}");
 			//3.execute sql
 			
 			ResultSet meResultSet=meStatement.executeQuery();
