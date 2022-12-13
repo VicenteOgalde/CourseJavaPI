@@ -5,6 +5,10 @@ package finalAppJDBC;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -44,6 +48,7 @@ class SheetBD extends JPanel{
 	private JComboBox tableCombo;
 	private JTextArea infoArea;
 	private Connection conn;
+	private FileReader fileReader;
 	
 	public SheetBD() {
 		setLayout(new BorderLayout());
@@ -67,12 +72,21 @@ class SheetBD extends JPanel{
 	}
 	public void connBD() {
 		conn=null;
-		
+		String [] data= new String[3];
 		try {
-			conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bootcamp",
-						"root","");
+			fileReader= new FileReader("D:/Proyectos JAVA/CursoPildorasInformaticas"
+					+ "/JDBC_BD/src/finalAppJDBC/dbRoute.txt");
+			BufferedReader buffer= new BufferedReader(fileReader);
+			for(int i=0;i<=2;i++) {
+				data[i]= buffer.readLine();
+			}
+			conn=DriverManager.getConnection(data[0],
+						data[1],data[2]);
 			
-		} catch (SQLException e) {
+			fileReader.close();
+			buffer.close();
+			
+		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
