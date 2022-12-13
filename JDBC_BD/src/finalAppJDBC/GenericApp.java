@@ -18,9 +18,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GenericApp {
 
@@ -75,7 +77,31 @@ class SheetBD extends JPanel{
 		String [] data= new String[3];
 		try {
 			fileReader= new FileReader("D:/Proyectos JAVA/CursoPildorasInformaticas"
-					+ "/JDBC_BD/src/finalAppJDBC/dbRoute.txt");
+					+ "/JDBC_BD/src/finalAppJDBC/dbRoue.txt");
+			
+			
+		}catch(IOException e2) {
+			
+			JFileChooser chooser= new JFileChooser();
+			
+			FileNameExtensionFilter filter= new FileNameExtensionFilter("Text Files", "txt");
+			
+			chooser.setFileFilter(filter);
+			
+			int rVal = chooser.showOpenDialog(this);
+			
+			if(rVal==JFileChooser.APPROVE_OPTION) {
+				try {
+					fileReader= new FileReader(chooser.getSelectedFile().getAbsolutePath());
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+			
+		try {
 			BufferedReader buffer= new BufferedReader(fileReader);
 			for(int i=0;i<=2;i++) {
 				data[i]= buffer.readLine();
@@ -91,6 +117,7 @@ class SheetBD extends JPanel{
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public void obtainTable() {
 		ResultSet rs=null;
