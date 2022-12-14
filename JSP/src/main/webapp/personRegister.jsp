@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Person Register</title>
+</head>
+<body>
+<jsp:include page="formRegister.html"></jsp:include><br><br>
+
+<p>------------------------------------------</p>
+
+<jsp:include page="date.jsp"></jsp:include>
+
+</body>
+</html>
