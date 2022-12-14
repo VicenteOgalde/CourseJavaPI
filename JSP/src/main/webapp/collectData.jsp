@@ -19,7 +19,9 @@ String password= request.getParameter("password");
 String country= request.getParameter("country");
 String tech= request.getParameter("tech");
 
-Connection conn=DriverManager.getConnection("jdbc:mysql//localhost:3306/jsp_project");
+Class.forName("com.mysql.jdbc.Driver");
+
+Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/jsp_project","root","");
 
 Statement statement= conn.createStatement();
 
