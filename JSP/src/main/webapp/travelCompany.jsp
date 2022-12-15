@@ -7,14 +7,14 @@
 <title>Travels</title>
 </head>
 <body>
-<form action="">
+<form action="cityRequest.jsp">
 Choose your city destiny:
 
 <select name="city">
 
 <option>Madrid</option>
 <option>Paris</option>
-<option>New York</option>
+<option>New_York</option>
 <option>Sidney</option>
 
 
