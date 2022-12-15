@@ -38,10 +38,23 @@ pageContext.setAttribute("data", data);
 
 
 %>
+<table border="1">
+<tr>
+<td>ID</td><td>Name</td><td>Tech</td><td>FrameWork</td> 
+</tr>
 <c:forEach var="user" items="${data}">
+<tr><td>${user.id}</td><td>${user.name}</td><td>${user.tech}</td>
 
-	${user.name}<br>
+<td><c:if test="${user.tech.equals('Java')}">Spring</c:if>
+	<c:if test="${user.tech.equals('PHP')}">Laravel</c:if>
+	<c:if test="${user.tech.equals('JavaScript')}">NodeJS</c:if>
+
+</td> 
+
+</tr>
+
 
 </c:forEach>
+</table>	
 </body>
 </html>
