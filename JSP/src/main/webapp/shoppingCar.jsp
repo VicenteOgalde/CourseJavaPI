@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -47,12 +49,25 @@
 <h2>Shopping cart</h2>
 
 <%
-String [] cart= request.getParameterValues("items");
 
-if(cart!=null){
-	for(String item:cart){
-		out.println("<li>"+item+"</li>");
+List<String> cart=(List<String>)session.getAttribute("cart");
+
+if(cart == null){
+	cart=new ArrayList<String>();
+	session.setAttribute("cart", cart);
+}
+
+String [] cartS=request.getParameterValues("items");
+
+if(cartS!=null){
+	for(String item:cartS){
+		cart.add(item);
+		
+		//out.println("<li>"+item+"</li>");
 	}
+}
+for(String item:cart){
+	out.println("<li>"+item+"</li>");
 }
 
 %>
