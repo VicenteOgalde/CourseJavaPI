@@ -2,6 +2,7 @@ package com.VO.products;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,25 @@ public class ProductRepository {
 					rs.getDouble("price"),rs.getDate("date")));
 		}
 		return products;
+	}
+	public void addProduct(Product product) {
+		Connection conn=null;
+		Statement st=null;
+		
+		
+		try {
+			conn=dataOrigin.getConnection();
+			st=conn.createStatement();
+			String sql="Select * from product";
+			
+			
+			st.executeQuery(sql);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

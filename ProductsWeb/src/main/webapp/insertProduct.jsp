@@ -7,7 +7,8 @@
 <title>Form Product</title>
 </head>
 <body>
-<form action="register.jsp">
+<form method="get" action="ProductController">
+<input type="hidden" name="quest" value="newProduct">
 
 Id:<input type="text" name="id"><br>
 
@@ -21,8 +22,9 @@ Date:<input type="date" name="date"><br>
 
 
 
-<input type="submit" value="register">
+<input type="submit" value="Insert Product">
 
+</form>
 
 </body>
 </html>

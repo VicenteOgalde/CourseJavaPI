@@ -1,6 +1,9 @@
 package com.VO.products;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -41,6 +44,44 @@ public class ProductController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String quest = request.getParameter("quest");
+		
+		if(quest==null) {
+			obtainData(request,response);
+		}else if(quest.equalsIgnoreCase("newProduct")) {
+			try {
+				addProduct(request,response);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+	}
+
+
+
+
+	private void addProduct(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ParseException {
+		// TODO Auto-generated method stub
+		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+		Product product= new Product(request.getParameter("id"), request.getParameter("name"),
+				request.getParameter("section"),Double.parseDouble(request.getParameter("price")),dateFormat.parse(request.getParameter("date")));
+		productRepository.addProduct(product);
+		obtainData(request,response);
+		
+	}
+
+
+
+
+	private void obtainData(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
 		List<Product> products;
 		
 		try {
@@ -55,9 +96,6 @@ public class ProductController extends HttpServlet {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 		
 	}
 
