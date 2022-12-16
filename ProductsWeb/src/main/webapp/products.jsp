@@ -22,10 +22,14 @@ background-color: blue;
 text-align: center;
 background-color: #5882FA;
 
-
+}
+table{
+float:left;
+}
+#buttonContainer{
+margin-left: 300px;
 
 }
-
 </style>
 
 </head>
@@ -47,16 +51,31 @@ background-color: #5882FA;
 
 
 <tr>
-<td class="rows">${e.getId()}</td>
-<td class="rows">${e.getName()}</td>
-<td class="rows">${e.getSection()}</td>
-<td class="rows">${e.getPrice()}</td>
-<td class="rows">${e.getDate()}</td>
+<td class="rows">${e.id}</td>
+<td class="rows">${e.name}</td>
+<td class="rows">${e.section}</td>
+<td class="rows">${e.price}</td>
+<td class="rows">${e.date}</td>
 
 </tr>
 </c:forEach>
 
 </table>
+
+<div id="buttonContainer">
+	<input type="button" value="Insert new Product" onclick="window.location.href='insertProduct.jsp'"/>
+
+</div>
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
