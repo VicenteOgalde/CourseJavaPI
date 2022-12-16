@@ -45,10 +45,14 @@ margin-left: 300px;
 <td class="header">Section</td>
 <td class="header">Price</td>
 <td class="header">Date</td>
+<td class="header">Action</td>
 
 </tr>
 <c:forEach var="e" items="${products}">
-
+<c:url var="linkTem" value="ProductController">
+	<c:param name="quest" value="updateProduct"></c:param>
+	<c:param name="idForUpdate" value="${e.id}"></c:param>
+</c:url>
 
 <tr>
 <td class="rows">${e.id}</td>
@@ -56,7 +60,7 @@ margin-left: 300px;
 <td class="rows">${e.section}</td>
 <td class="rows">${e.price}</td>
 <td class="rows">${e.date}</td>
-
+<td class="rows"><a href="${linkTem}"> Update</a> </td>
 </tr>
 </c:forEach>
 
