@@ -58,10 +58,31 @@ public class ProductController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(quest.equalsIgnoreCase("updateProduct")) {
+			try {
+				loadProduct(request,response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		
 		
+	}
+
+
+
+
+	private void loadProduct(HttpServletRequest request, HttpServletResponse response)throws Exception {
+		// TODO Auto-generated method stub
+		Product pTemp= productRepository.findByIdProduct(request.getParameter("idForUpdate"));
+		
+		request.setAttribute("pTemp", pTemp);
+		
+		RequestDispatcher rd=request.getRequestDispatcher("/updateProduct.jsp");
+		
+		rd.forward(request, response);
 	}
 
 

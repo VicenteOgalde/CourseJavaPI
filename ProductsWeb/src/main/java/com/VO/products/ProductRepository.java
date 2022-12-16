@@ -62,5 +62,66 @@ public class ProductRepository {
 		}
 		
 	}
+
+	public void updateProduct(String parameter) {
+		Connection conn=null;
+		PreparedStatement pst=null;
+		/*
+		
+		try {
+			conn=dataOrigin.getConnection();
+			
+			String sql="Insert into product(id,name,section,price,date) value(?,?,?,?,?)";
+			pst=conn.prepareStatement(sql);
+			pst.setString(1, product.getId());
+			pst.setString(2, product.getName());
+			pst.setString(3, product.getSection());
+			pst.setDouble(4, product.getPrice());
+			
+			java.sql.Date dateSql= new Date(product.getDate().getTime());
+			pst.setDate(5, dateSql);
+			
+			pst.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		*/
+		
+	}
+
+	public Product findByIdProduct(String parameter) throws Exception {
+		
+		Connection conn=null;
+		Statement st=null;
+		Product product = new Product();
+		ResultSet rs=null;
+		
+		try {
+			conn=dataOrigin.getConnection();
+			
+			String sql="Select * from product where id='"+parameter+"'";
+			st=conn.createStatement();
+			
+			rs=st.executeQuery(sql);
+			if(rs.next()) {
+			product.setId(rs.getString("id"));
+			product.setName(rs.getString("name"));
+			product.setSection(rs.getString("section"));
+			product.setPrice(rs.getDouble("price"));
+			product.setDate(rs.getDate("date"));
+			}else {
+				throw new Exception("not found product id: "+parameter);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return product;
+		
+	}
 	
 }

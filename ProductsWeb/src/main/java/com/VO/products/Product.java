@@ -17,6 +17,17 @@ public class Product {
 		this.price = price;
 		this.date = date;
 	}
+	
+	
+	public Product(String name, String section, Double price, Date date) {
+		super();
+		this.name = name;
+		this.section = section;
+		this.price = price;
+		this.date = date;
+	}
+
+
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
