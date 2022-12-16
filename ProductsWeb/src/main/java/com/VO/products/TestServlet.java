@@ -18,7 +18,7 @@ import javax.sql.*;
  * Servlet implementation class ConnServlet
  */
 @WebServlet("/ConnServlet")
-public class ConnServlet extends HttpServlet {
+public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	//define DataSource
@@ -32,7 +32,7 @@ public class ConnServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConnServlet() {
+    public TestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
