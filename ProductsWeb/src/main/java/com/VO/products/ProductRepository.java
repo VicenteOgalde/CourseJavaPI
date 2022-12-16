@@ -1,6 +1,8 @@
 package com.VO.products;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -36,16 +38,23 @@ public class ProductRepository {
 	}
 	public void addProduct(Product product) {
 		Connection conn=null;
-		Statement st=null;
+		PreparedStatement pst=null;
 		
 		
 		try {
 			conn=dataOrigin.getConnection();
-			st=conn.createStatement();
-			String sql="Select * from product";
 			
+			String sql="Insert into product(id,name,section,price,date) value(?,?,?,?,?)";
+			pst=conn.prepareStatement(sql);
+			pst.setString(1, product.getId());
+			pst.setString(2, product.getName());
+			pst.setString(3, product.getSection());
+			pst.setDouble(4, product.getPrice());
 			
-			st.executeQuery(sql);
+			java.sql.Date dateSql= new Date(product.getDate().getTime());
+			pst.setDate(5, dateSql);
+			
+			pst.execute();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
