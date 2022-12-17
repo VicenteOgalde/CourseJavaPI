@@ -63,23 +63,23 @@ public class ProductRepository {
 		
 	}
 
-	public void updateProduct(String parameter) {
+	public void updateProduct(Product product) {
 		Connection conn=null;
 		PreparedStatement pst=null;
-		/*
+		
 		
 		try {
 			conn=dataOrigin.getConnection();
 			
-			String sql="Insert into product(id,name,section,price,date) value(?,?,?,?,?)";
+			String sql="Update product set name=?, section=?, price=?, date=? where id=?";
 			pst=conn.prepareStatement(sql);
-			pst.setString(1, product.getId());
-			pst.setString(2, product.getName());
-			pst.setString(3, product.getSection());
-			pst.setDouble(4, product.getPrice());
+			pst.setString(5, product.getId());
+			pst.setString(1, product.getName());
+			pst.setString(2, product.getSection());
+			pst.setDouble(3, product.getPrice());
 			
 			java.sql.Date dateSql= new Date(product.getDate().getTime());
-			pst.setDate(5, dateSql);
+			pst.setDate(4, dateSql);
 			
 			pst.execute();
 			
@@ -88,7 +88,7 @@ public class ProductRepository {
 			e.printStackTrace();
 		}
 		
-		*/
+		
 		
 	}
 

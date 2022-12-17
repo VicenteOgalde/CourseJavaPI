@@ -65,9 +65,33 @@ public class ProductController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(quest.equalsIgnoreCase("updateProductX")) {
+			try {
+				updateProduct(request,response);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		
+		
+	}
+
+
+
+
+	private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ParseException {
+		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+		Product product = new Product(request.getParameter("id"), request.getParameter("name"),
+				request.getParameter("section"),Double.parseDouble(request.getParameter("price")),dateFormat.parse(request.getParameter("date")));
+	
+		productRepository.updateProduct(product);
+		
+		obtainData(request, response);
 		
 	}
 
