@@ -34,9 +34,9 @@ public class ProductRepository {
 			products.add(new Product(rs.getString("id"),rs.getString("name"),rs.getString("section"),
 					rs.getDouble("price"),rs.getDate("date")));
 		}
-		conn.close();
 		st.close();
 		rs.close();
+		conn.close();
 	
 		return products;
 	}
@@ -67,9 +67,8 @@ public class ProductRepository {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			conn.close();
 			pst.close();
-			
+			conn.close();
 		}
 		
 	}
@@ -98,9 +97,8 @@ public class ProductRepository {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			conn.close();
 			pst.close();
-			
+			conn.close();
 		}
 		
 		
@@ -135,9 +133,9 @@ public class ProductRepository {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			conn.close();
 			pst.close();
 			rs.close();
+			conn.close();
 		}
 		
 		return product;
@@ -160,8 +158,9 @@ public class ProductRepository {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			conn.close();
 			pst.close();
+			conn.close();
+		
 			
 		}
 		
