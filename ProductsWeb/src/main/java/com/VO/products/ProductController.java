@@ -1,6 +1,7 @@
 package com.VO.products;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -57,6 +58,9 @@ public class ProductController extends HttpServlet {
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}else if(quest.equalsIgnoreCase("updateProduct")) {
 			try {
@@ -74,6 +78,16 @@ public class ProductController extends HttpServlet {
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(quest.equalsIgnoreCase("deleteProduct")) {
+			try {
+				deleteProduct(request,response);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
@@ -84,7 +98,17 @@ public class ProductController extends HttpServlet {
 
 
 
-	private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ParseException {
+	private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		
+		productRepository.deleteById(request.getParameter("idForDelete"));
+		obtainData(request, response);
+		
+	}
+
+
+
+
+	private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ParseException, SQLException {
 		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
 		Product product = new Product(request.getParameter("id"), request.getParameter("name"),
 				request.getParameter("section"),Double.parseDouble(request.getParameter("price")),dateFormat.parse(request.getParameter("date")));
@@ -112,7 +136,7 @@ public class ProductController extends HttpServlet {
 
 
 
-	private void addProduct(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ParseException {
+	private void addProduct(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ParseException, SQLException {
 		// TODO Auto-generated method stub
 		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
 		Product product= new Product(request.getParameter("id"), request.getParameter("name"),

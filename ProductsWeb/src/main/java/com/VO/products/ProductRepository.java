@@ -34,9 +34,16 @@ public class ProductRepository {
 			products.add(new Product(rs.getString("id"),rs.getString("name"),rs.getString("section"),
 					rs.getDouble("price"),rs.getDate("date")));
 		}
+		conn.close();
+		st.close();
+		rs.close();
+	
 		return products;
 	}
-	public void addProduct(Product product) {
+		
+	
+	
+	public void addProduct(Product product) throws SQLException {
 		Connection conn=null;
 		PreparedStatement pst=null;
 		
@@ -59,11 +66,15 @@ public class ProductRepository {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			conn.close();
+			pst.close();
+			
 		}
 		
 	}
 
-	public void updateProduct(Product product) {
+	public void updateProduct(Product product) throws SQLException {
 		Connection conn=null;
 		PreparedStatement pst=null;
 		
@@ -86,6 +97,10 @@ public class ProductRepository {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			conn.close();
+			pst.close();
+			
 		}
 		
 		
@@ -95,17 +110,18 @@ public class ProductRepository {
 	public Product findByIdProduct(String parameter) throws Exception {
 		
 		Connection conn=null;
-		Statement st=null;
+		PreparedStatement pst=null;
 		Product product = new Product();
 		ResultSet rs=null;
 		
 		try {
 			conn=dataOrigin.getConnection();
 			
-			String sql="Select * from product where id='"+parameter+"'";
-			st=conn.createStatement();
-			
-			rs=st.executeQuery(sql);
+			String sql="Select * from product where id=?";
+			pst=conn.prepareStatement(sql);
+			pst.setString(1, parameter);
+						
+			rs=pst.executeQuery();
 			if(rs.next()) {
 			product.setId(rs.getString("id"));
 			product.setName(rs.getString("name"));
@@ -118,9 +134,37 @@ public class ProductRepository {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			conn.close();
+			pst.close();
+			rs.close();
 		}
 		
 		return product;
+		
+	}
+
+	public void deleteById(String parameter) throws SQLException {
+		Connection conn=null;
+		PreparedStatement pst=null;
+		
+		try {
+			conn=dataOrigin.getConnection();
+			String sql= "Delete from product where id=?";
+			pst=conn.prepareStatement(sql);
+			pst.setString(1, parameter);
+			pst.execute();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			conn.close();
+			pst.close();
+			
+		}
+		
 		
 	}
 	
