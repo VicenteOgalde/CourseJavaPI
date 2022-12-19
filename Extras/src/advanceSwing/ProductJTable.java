@@ -7,12 +7,16 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 
 public class ProductJTable {
 
@@ -31,6 +35,8 @@ class ProductFrame extends JFrame{
 	private Connection conn;
 	private Statement st;
 	private ResultSet rs; 
+	private RSModelTable rsModelTable;
+	
 	
 	public ProductFrame() {
 		setTitle("Product JTable");
@@ -64,9 +70,12 @@ class ProductFrame extends JFrame{
 				try {
 					st=conn.createStatement();
 					rs=st.executeQuery(sql);
-					while(rs.next()) {
-						System.out.println(rs.getString("name"));
-					}
+				
+					rsModelTable= new RSModelTable(rs);
+					JTable table= new JTable(rsModelTable);
+					add(new JScrollPane(table),BorderLayout.CENTER);
+					validate();
+					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -79,4 +88,75 @@ class ProductFrame extends JFrame{
 		add(upper,BorderLayout.NORTH);
 		
 	}
+}
+
+class RSModelTable extends AbstractTableModel{
+	
+	private ResultSet rs;
+	private ResultSetMetaData rsmd;
+	
+	
+
+	public RSModelTable(ResultSet rs) {
+		
+		this.rs = rs;
+		try {
+			this.rsmd=rs.getMetaData();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public int getRowCount() {
+	
+		try {
+			rs.last();
+			return rs.getRow();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		
+	}
+
+	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		try {
+			return rsmd.getColumnCount();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		try {
+			rs.absolute(rowIndex+1);
+			return rs.getObject(columnIndex+1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+		
+		
+	}
+	public String getColumnName(int c) {
+		try {
+		return rsmd.getColumnName(c+1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 }
