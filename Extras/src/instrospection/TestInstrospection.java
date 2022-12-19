@@ -1,6 +1,8 @@
 package instrospection;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Scanner;
 
@@ -22,6 +24,10 @@ public class TestInstrospection {
 				System.out.println("extends from "+superCl.getName());
 			}
 			contrucPrint(cl);
+			System.out.println();
+			methodPrint(cl);
+			System.out.println();
+			fieldPrint(cl);
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -41,11 +47,34 @@ public class TestInstrospection {
 			Class [] params=c.getParameterTypes();
 			for (int i=0;i<params.length;i++) {
 				if(i>0)System.out.print(", ");
-				System.out.println(params[i].getName());
+				System.out.print(params[i].getName());
 			}
 			System.out.print(");");
 		}
 		
+	}
+	public static void methodPrint(Class cl) {
+		Method [] methods=cl.getDeclaredMethods();
+		
+		for (Method m : methods) {
+			System.out.print(" "+Modifier.toString(m.getModifiers()));
+			System.out.print(" "+m.getClass().getName()+" "+m.getName()+" (");
+			Class [] params=m.getParameterTypes();
+			for (int i=0;i<params.length;i++) {
+				if(i>0)System.out.print(", ");
+				System.out.print(params[i].getName());
+			}
+			System.out.print(");");
+			System.out.println();
+		}
+	}
+	public static void fieldPrint(Class cl) {
+		Field [] f=cl.getDeclaredFields();
+		for (Field field : f) {
+			System.out.print(" "+Modifier.toString(field.getModifiers()));
+			System.out.print(" "+field.getType().getName()+" "+field.getName()+" ;");
+			System.out.println();
+		}
 	}
 
 }
